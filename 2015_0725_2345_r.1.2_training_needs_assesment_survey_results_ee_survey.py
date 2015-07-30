@@ -23,6 +23,21 @@ def create_deptlst(filename):
         new_deptlst.append(i)
     return new_deptlst
 
+def create_skill_lst(filename):
+    skill_lst = []
+    new_text = []
+    text = set_up_file(filename)
+    for i in text[1][10:]:
+        new_text.append(i)
+    for x in new_text:
+        dash = x.find('-')
+        skill = x[:dash]
+        skill = skill.strip('"')
+        if skill in skill_lst:
+            pass
+        else:
+            skill_lst.append(skill)
+    return skill_lst
 
 
 
@@ -30,5 +45,8 @@ def create_deptlst(filename):
 
 
 
-print create_deptlst('2015_0725_2111_i.2_test_results_for_ee_tna_surevey.cvs')
+
+
+print create_skill_lst('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
+#print create_deptlst('2015_0725_2111_i.2_test_results_for_ee_tna_surevey.cvs')
 #print set_up_file('2015_0725_2111_i.2_test_results_for_ee_tna_surevey.cvs')
