@@ -39,6 +39,38 @@ def create_skill_lst(filename):
             skill_lst.append(skill)
     return skill_lst
 
+def skills_dict(filename):
+    frequency = 0
+    proficiency = 0
+    skill_dict = {}
+    skill_dict['A Department'] = None
+    skill_lst = create_skill_lst(filename)
+    for i in skill_lst:
+        skill_dict[i] = [frequency, proficiency]
+    return sorted(skill_dict)
+
+def response_lst(filename):
+    response_lst = []
+    text = set_up_file(filename)
+    for i in text[2:]:
+        x = i[9:]
+        response_lst.append(x)
+    return response_lst
+       
+
+def tally_results_by_dept(filename, department):
+    skills = skills_dict(filename)
+    skills['A Department'] = department
+    responses = response_lst(filename)
+    for i in responses:
+        if department in i:
+            for key in skills:
+                if skills[key] == 'A Department':
+                    pass
+                else:
+                    skills[key] = 
+
+            
 
 
 
@@ -47,6 +79,16 @@ def create_skill_lst(filename):
 
 
 
-print create_skill_lst('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
-#print create_deptlst('2015_0725_2111_i.2_test_results_for_ee_tna_surevey.cvs')
-#print set_up_file('2015_0725_2111_i.2_test_results_for_ee_tna_surevey.cvs')
+
+
+
+
+
+
+
+print tally_results_by_dept('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
+#print response_lst('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
+#print skills_dict('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
+#print create_skill_lst('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
+#print create_deptlst('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
+#print set_up_file('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
