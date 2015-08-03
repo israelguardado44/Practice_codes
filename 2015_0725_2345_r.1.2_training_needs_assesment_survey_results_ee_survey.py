@@ -40,14 +40,12 @@ def create_skill_lst(filename):
     return skill_lst
 
 def skills_dict(filename):
-    frequency = 0
-    proficiency = 0
     skill_dict = {}
-    skill_dict['A Department'] = None
     skill_lst = create_skill_lst(filename)
+    skill_dict['A Department'] = None
     for i in skill_lst:
-        skill_dict[i] = [frequency, proficiency]
-    return sorted(skill_dict)
+        skill_dict[i] = None
+    return skill_dict
 
 def response_lst(filename):
     response_lst = []
@@ -58,24 +56,55 @@ def response_lst(filename):
     return response_lst
        
 
-def tally_results_by_dept(filename, department):
+def switch_to_numbers(filename):
+    i = 0
+    x = 0
+    resp_lst = response_lst(filename)
+    for y in resp_lst:
+        x = 0
+        for item in y:
+            if resp_lst[i][x] == 'Daily':
+                resp_lst[i][x] = 1
+            elif resp_lst[i][x] == 'Often':
+                resp_lst[i][x] = 2
+            elif resp_lst[i][x] == 'Occasionally':
+                resp_lst[i][x] = 3
+            elif resp_lst[i][x] == 'Rarely/Never':
+                resp_lst[i][x] = 4
+            elif resp_lst[i][x] == 'Extremely Proficient' or resp_lst[i][x] == 'Extremely Proficient\n':
+                resp_lst[i][x] = 11
+            elif resp_lst[i][x] == 'Very Proficient' or resp_lst[i][x] == 'Very Proficient\n':
+                resp_lst[i][x] = 12
+            elif resp_lst[i][x] == 'Proficient' or resp_lst[i][x] == 'Proficient\n':
+                resp_lst[i][x] = 13
+            elif resp_lst[i][x] == 'Somewhat Proficient' or resp_lst[i][x] == 'Somewhat Proficient\n':
+                resp_lst[i][x] = 14
+            elif resp_lst[i][x] == 'Not Proficient' or resp_lst[i][x] == 'Not Proficient\n':
+                resp_lst[i][x] = 15
+            x += 1
+        i += 1
+    return resp_lst
+
+def tally_dept_results(filename, department):
     skills = skills_dict(filename)
+    response = switch_to_numbers(filename)
     skills['A Department'] = department
-    responses = response_lst(filename)
-    for i in responses:
-        if department in i:
-            for key in skills:
-                if skills[key] == 'A Department':
+    for i in sorted(skills):
+        x = 1
+        y = 2
+        for item in response:
+            if department in item:
+                print item
+                if skills[i] == department:
                     pass
+                elif skills[i] == 
                 else:
-                    skills[key] = 
-
-            
-
-
-
-
-
+                    skills[i] = [item[x], item[y]]
+                x = y + 1
+                y = y + 2
+            else:
+                pass
+    return skills
 
 
 
@@ -86,9 +115,12 @@ def tally_results_by_dept(filename, department):
 
 
 
-print tally_results_by_dept('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
+
+
+
+print tally_dept_results('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv', 'County Counsel')
+#print switch_to_numbers('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
 #print response_lst('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
 #print skills_dict('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
 #print create_skill_lst('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
 #print create_deptlst('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
-#print set_up_file('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
