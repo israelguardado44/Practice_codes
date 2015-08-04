@@ -94,10 +94,10 @@ def tally_dept_results(filename, department):
         y = 2
         for item in response:
             if department in item:
-                print item
                 if skills[i] == department:
                     pass
-                elif skills[i] == 
+                elif skills[i] == [int, int]:
+                    skills[i] = skills[i][0] + 1, skills[i][1] + 1
                 else:
                     skills[i] = [item[x], item[y]]
                 x = y + 1
