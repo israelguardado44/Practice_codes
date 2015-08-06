@@ -49,13 +49,17 @@ def make_skill_dict(filename):
     skill_dict = dict.fromkeys(skill_lst)
     return skill_dict
 
+def tally_results_by_dept(filename, dept):
+    responses = switch_to_numbers(filename)
+    skill_dict = make_skill_dict(filename)
+                
 
 
 
 
 
 
-
-print make_skill_dict('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
+print tally_results_by_dept('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv', 'Personnel Services')
+#print make_skill_dict('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
 #print switch_to_numbers('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
 #print open_file('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
