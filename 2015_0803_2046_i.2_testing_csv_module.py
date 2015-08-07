@@ -46,13 +46,30 @@ def make_skill_dict(filename):
                 pass
             else:
                 skill_lst.append(skill)
-    skill_dict = dict.fromkeys(skill_lst)
+    skill_dict = dict.fromkeys(skill_lst, [])
     return skill_dict
 
 def tally_results_by_dept(filename, dept):
     responses = switch_to_numbers(filename)
+    dept_response = []
+    for i in responses:
+        if dept in i:
+            dept_response.append(i[10:])
+    print dept_response
     skill_dict = make_skill_dict(filename)
-                
+    for key in sorted(skill_dict):
+        frequency = dept_response[0].pop(0)
+        proficiency = dept_response[0].pop(0)
+        skill_dict[key] = [frequency, proficiency]
+
+
+            
+
+
+
+
+
+
 
 
 
