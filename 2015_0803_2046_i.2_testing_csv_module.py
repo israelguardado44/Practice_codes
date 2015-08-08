@@ -64,38 +64,14 @@ def tally_results_by_dept(filename, dept):
             vlst = [i[t],i[t + 1]]
             skill_dict[key] = [x + y for x,y in zip(vlst, skill_dict[key])]
             t += 2
-    for itme in dept_response:
-        print itme
-    for dic in sorted(skill_dict):
-        print skill_dict[dic]
+    return skill_dict
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-print tally_results_by_dept('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv', 'Personnel Services')
+print tally_results_by_dept('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv', 'County Counsel')
 #print make_skill_dict('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
 #print switch_to_numbers('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
 #print open_file('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
