@@ -31,6 +31,8 @@ def switch_to_numbers(filename):
                     i[t] = 14
                 elif i[t] == 'Not Proficient':
                     i[t] = 15
+                elif i[t] == '':
+                    i[t] = 0
     return text
 
 def make_skill_dict(filename):
@@ -46,7 +48,7 @@ def make_skill_dict(filename):
                 pass
             else:
                 skill_lst.append(skill)
-    skill_dict = dict.fromkeys(skill_lst, [])
+    skill_dict = dict.fromkeys(skill_lst, [0,0])
     return skill_dict
 
 def tally_results_by_dept(filename, dept):
@@ -55,15 +57,32 @@ def tally_results_by_dept(filename, dept):
     for i in responses:
         if dept in i:
             dept_response.append(i[10:])
-    print dept_response
     skill_dict = make_skill_dict(filename)
-    for key in sorted(skill_dict):
-        frequency = dept_response[0].pop(0)
-        proficiency = dept_response[0].pop(0)
-        skill_dict[key] = [frequency, proficiency]
+    for i in dept_response:
+        t = 0
+        for key in sorted(skill_dict):
+            vlst = [i[t],i[t + 1]]
+            skill_dict[key] = [x + y for x,y in zip(vlst, skill_dict[key])]
+            t += 2
+    for itme in dept_response:
+        print itme
+    for dic in sorted(skill_dict):
+        print skill_dict[dic]
 
 
-            
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
