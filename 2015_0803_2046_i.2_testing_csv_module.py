@@ -51,19 +51,27 @@ def make_skill_dict(filename):
     skill_dict = dict.fromkeys(skill_lst, [0,0])
     return skill_dict
 
-def tally_results_by_dept(filename, dept):
+def tally_results_by_dept(filename, dept='All'):
     responses = switch_to_numbers(filename)
     dept_response = []
-    for i in responses:
-        if dept in i:
+    if dept == 'All':
+        for i in responses[2:]:
             dept_response.append(i[10:])
+    else:
+        for i in responses:
+            if dept in i:
+                dept_response.append(i[10:])
     skill_dict = make_skill_dict(filename)
+    length = len(dept_response) + 0.0
     for i in dept_response:
         t = 0
         for key in sorted(skill_dict):
             vlst = [i[t],i[t + 1]]
             skill_dict[key] = [x + y for x,y in zip(vlst, skill_dict[key])]
             t += 2
+    for key in skill_dict:
+        skill_dict[key][0] = round(skill_dict[key][0] / length, 2)
+        skill_dict[key][1] = round(skill_dict[key][1] / length, 2)
     return skill_dict
 
 
@@ -71,7 +79,7 @@ def tally_results_by_dept(filename, dept):
 
 
 
-print tally_results_by_dept('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv', 'County Counsel')
+print tally_results_by_dept('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
 #print make_skill_dict('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
 #print switch_to_numbers('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
 #print open_file('2015_0725_2111_i.2_test_results_for_ee_tna_survey.csv')
