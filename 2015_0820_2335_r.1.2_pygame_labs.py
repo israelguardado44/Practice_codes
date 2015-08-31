@@ -1,3 +1,4 @@
+import pygame
 def get_celcius():
     fh_temp = float(input("Enter temperature in Fahrenheit: "))
     celcius = (fh_temp - 32) * (5/9)
@@ -63,10 +64,116 @@ def quiz_time():
     else:
         print ("You did not pass the quiz...\nYou just wasted everyones time....")
     
-print (quiz_time())
+#print (quiz_time())
+
+def print_asterisk():
+    i = 16
+    t = ' '
+    j = 9
+    g = 1
+    for row in range(1, 10):
+        print (' ' * i, end= '')
+        i -= 2
+        for n in range(1, row):
+            print (n, end= ' ')
+        for x in range(row, 0, -1):
+            if x > 9:
+                pass
+            else:
+                print (x , end= ' ')
+        print ()   
+    for row in range(1,9):
+        print ((t * g), end= ' ')
+        for row in range(1,j):
+            print (row, end= ' ')
+        for row in range(j-2,0, -1):
+            print (row, end= ' ')
+        j -= 1
+        g += 2
+        print ()
+##print (print_asterisk())
+
+def lab_ch_6_1():
+    x = 10
+    y = 11
+    a = 1
+    for row in range(1,10):
+        for n in range(x, y):
+            print (n, end= ' ')
+        x += row
+        y += row + 1
+        print ()
+##print (lab_ch_6_1())
 
 
+def make_grid():
+    green = (0, 255, 0)
+    black = (0,0,0)
+    pygame.init()
+
+    size = (700, 500)
+    screen = pygame.display.set_mode(size)
+
+    pygame.display.set_caption("The Grid")
+
+    done = False
+
+    clock = pygame.time.Clock()
+
+    while not done:
+        x = 0
+        y = 0
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True
+        screen.fill(black)
+        for row in range (0, 500, 8):
+            for col in range(0, 700, 8):
+                pygame.draw.rect(screen, green, [col,row,4,4])
+
+        pygame.display.flip()
+
+        clock. tick(60)
 
 
+##print (make_grid())
 
+def the_dungen():
+    room_list = []
+    room = ['Dinning room', 3, 1, None, 4]
+    room_list.append(room)
+    room = ['Kitchen', 2, None, None, 0]
+    room_list.append(room)
+    room = ['Living Room', None, None, 1, 3]
+    room_list.append(room)
+    room = ['Bedroom', None, 2, 0, None]
+    room_list.append(room)
+    room = ['Bathroom', None, 0, None, None]
+    room_list.append(room)
+    current_room = 0
+    done = False
+    while not done:
+        print ("You are in the {0}. There is a passage to the North and to the East.".format(room_list[current_room][0]))
+        direction = input("What direction do you want to go? > ")
+        direction = direction.lower()
+
+
+        if direction == 'quit':
+            done = True
+        elif direction == 'north':
+            next_room = room_list[current_room][1]
+        elif direction == 'east':
+            next_room = room_list[current_room][2]
+        elif direction == 'south':
+            next_room = room_list[current_room][3]
+        elif direction == 'west':
+            next_room = room_list[current_room][4]
+        if done == True:
+            pass
+        elif next_room == None:
+            print ("You can't go that way.")
+        else:
+            current_room = next_room
+
+##print (the_dungen())
 

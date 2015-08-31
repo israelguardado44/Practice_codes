@@ -1,5 +1,6 @@
 ##create a picture using pygame
 import pygame
+import random
 pygame.init()
 
 WHITE = (255, 255, 255)
@@ -15,9 +16,19 @@ BLUE_PURPLE = (15, 0, 65)
 BLACK_BLUE = (0, 0, 50)
 BLACK_BIT_O_BLUE = (0, 0, 15)
 
+pi = 3.14159265359
 size = (700, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Israel's Awesome Game")
+moon_x = -100
+moon_y = 195
+x_change = 2
+y_change = -1
+rain = []
+for i in range(50):
+    rain_x = random.randrange(0, 700)
+    rain_y = random.randrange(0, 500)
+    rain.append([rain_x, rain_y])
 
 
 done = False
@@ -37,7 +48,16 @@ while not done:
     pygame.draw.rect(screen, BLACK_BIT_O_BLUE, [0, 225, 700, 25])
 
     #draw the moon
-    pygame.draw.ellipse(screen, WHITE, [50, 25, 100, 100])
+    pygame.draw.ellipse(screen, WHITE, [moon_x, moon_y, 100, 100])
+    if moon_x >= 700:
+        moon_x = -100
+        moon_y = 195
+        y_change *= -1
+    else:
+        moon_x += x_change
+    if moon_y <= -75:
+        y_change *= -1
+    moon_y += y_change
 
     #draw main building
     pygame.draw.rect(screen, PURPLE, [230,75, 150, 425])
@@ -45,13 +65,20 @@ while not done:
     pygame.draw.polygon(screen, BLACK_PURPLE, [[400,65], [380, 75], [380, 500], [400, 500]])
     pygame.draw.line(screen, BLACK_GRAY, [380,75], [400, 65], 1)
 
-    ##draw windows
+    #draw windows
     window_colum = 250
     window_row = 100
     for i in range(0, 400, 50):
         for i in range(0, 120, 30):
             pygame.draw.rect(screen, BLACK_PURPLE, [window_colum + i, window_row, 15, 25])
         window_row += 50
+
+    #draw and animate the rain
+    for item in rain:
+        if item[1] > 500:
+            item[1] = random.randrange(-20, -5)
+        pygame.draw.ellipse(screen, WHITE, [item[0], item[1], 3, 3])
+        item[1] += 1
 
 
     pygame.display.flip()
