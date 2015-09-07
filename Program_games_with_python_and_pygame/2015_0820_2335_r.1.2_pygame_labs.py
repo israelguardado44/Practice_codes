@@ -1,4 +1,6 @@
 import pygame
+import random
+
 def get_celcius():
     fh_temp = float(input("Enter temperature in Fahrenheit: "))
     celcius = (fh_temp - 32) * (5/9)
@@ -176,4 +178,61 @@ def the_dungen():
             current_room = next_room
 
 ##print (the_dungen())
+
+def min(a,b,c):
+    x = a - b
+    if x >= 0:
+        if b < c:
+            return b
+        else:
+            return c
+    elif a < c:
+        return a
+    else:
+        return c
+##print (min(-4,-1007,-3))
+
+def box(h, w):
+    for i in range(h):
+        for n in range(w):
+            print ('*', end='')
+        print ()
+##print(box(3,2))
+
+def find(lst, key):
+    for i in range(len(lst)):
+        if lst[i] == key:
+            print (i)
+super_lst = [36,31,79, 96, 36, 91, 77, 33, 19, 3, 34, 12, 70, 12, 54, 98, 86, 11, 17, 17]
+##print (find(lst, 12))
+
+def create_list(x):
+    lst = []
+    for i in range(x):
+        y = random.randrange(1,x + 1)
+        lst.append(y)
+    return lst
+##print (create_list(5))
+
+def count_list(lst, n):
+    count = 0
+    for item in lst:
+        if item == n:
+            count += 1
+    return count
+##print (count_list(super_lst, 17))
+
+def average_list(lst):
+    count = 0
+    total = 0
+    for item in lst:
+        count += 1
+        total += item
+    average = total / item
+    return average
+##print (average_list(super_lst))
+
+
+
+
 
