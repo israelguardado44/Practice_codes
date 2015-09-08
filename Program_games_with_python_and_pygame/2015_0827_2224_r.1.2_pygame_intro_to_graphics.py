@@ -25,6 +25,10 @@ moon_y = 195
 x_change = 2
 y_change = -1
 rain = []
+background = pygame.image.load("2015_0907_1656_C.3_background_image_night_sky.png").convert()
+player_image = pygame.image.load("2015_0907_1704_C.3_player_icon_red_car.png").convert()
+player_image.set_colorkey(BLACK)
+click_sound = pygame.mixer.Sound('2015_0907_1830_C.3_bomb_sound_effect.wav')
 for i in range(50):
     rain_x = random.randrange(0, 700)
     rain_y = random.randrange(0, 500)
@@ -84,6 +88,8 @@ while not done:
                 y_speed = 0
             if event.key == pygame.K_DOWN:
                 y_speed = 0
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            click_sound.play()
     
 
     if joystick_count != 0:
@@ -101,9 +107,11 @@ while not done:
     screen.fill(BLACK)
     
     #draw background
-    pygame.draw.rect(screen, BLUE_PURPLE, [0, 0, 700, 200])
-    pygame.draw.rect(screen, BLACK_BLUE, [0, 175, 700, 75])
-    pygame.draw.rect(screen, BLACK_BIT_O_BLUE, [0, 225, 700, 25])
+    #pygame.draw.rect(screen, BLUE_PURPLE, [0, 0, 700, 200])
+    #pygame.draw.rect(screen, BLACK_BLUE, [0, 175, 700, 75])
+    #pygame.draw.rect(screen, BLACK_BIT_O_BLUE, [0, 225, 700, 25])
+
+    screen.blit(background, [0,0])
 
     #draw the moon
     pygame.draw.ellipse(screen, WHITE, [moon_x, moon_y, 100, 100])
@@ -126,7 +134,12 @@ while not done:
     draw_building(screen, 500, 100)
 
     #draw car
-    draw_car(screen, pos[0], pos[1])
+    #draw_car(screen, pos[0], pos[1])
+    player_position = pygame.mouse.get_pos()
+    player_x = player_position[0]
+    player_y = player_position[1]
+   
+    screen.blit(player_image, [player_x, player_y])
     draw_car(screen, x_coord, y_coord) 
 
 
