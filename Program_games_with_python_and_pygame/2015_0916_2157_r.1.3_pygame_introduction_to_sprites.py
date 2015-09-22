@@ -7,6 +7,9 @@ import random
 # Initialize Pygame
 pygame.init()
 
+# Add some sound
+good_block_sound = pygame.mixer.Sound("Powerup.wav")
+bad_block_sound = pygame.mixer.Sound("Explosion.wav")
 # Define some colors
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
@@ -66,7 +69,16 @@ class Player(pygame.sprite.Sprite):
         """ Find a new position for the player"""
         self.rect.x += self.change_x
         self.rect.y += self.change_y
- 
+        if self.rect.x > 695:
+            self.rect.x = 695
+        if self.rect.x < -9:
+            self.rect.x = -9
+        
+        if self.rect.y > 395:
+            self.rect.y = 395
+        if self.rect.y < -5:
+            self.rect.y = -5
+
 # Set the height and width of the screen
 screen_width = 700
 screen_height = 400
@@ -86,8 +98,8 @@ for i in range(50):
     block = Block(GREEN, 20, 15)
  
     # Set a random location for the block
-    block.rect.x = random.randrange(screen_width)
-    block.rect.y = random.randrange(screen_height)
+    block.rect.x = random.randrange(screen_width - 10)
+    block.rect.y = random.randrange(screen_height - 10)
  
     # Add the block to the list of objects
     good_block_list.add(block)
@@ -98,8 +110,8 @@ for i in range(50):
     block = Block(RED, 20, 15)
  
     # Set a random location for the block
-    block.rect.x = random.randrange(screen_width)
-    block.rect.y = random.randrange(screen_height)
+    block.rect.x = random.randrange(screen_width - 10)
+    block.rect.y = random.randrange(screen_height - 10)
  
     # Add the block to the list of objects
     bad_block_list.add(block)
@@ -165,8 +177,11 @@ while not done:
     # Check the list of collisions.
     for block in good_blocks_hit_list:
         score += 1
+        good_block_sound.play()
     for block in bad_blocks_hit_list:
         score -= 1
+        bad_block_sound.play()
+
     font = pygame.font.SysFont('Calibri', 25, True)
     text = font.render("Score: " + str(score), True, BLACK)
     screen.blit(text, [570,10])
